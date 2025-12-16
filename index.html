@@ -3,157 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Ethics & Engineering Log</title>
+    <title>AI Ethics & Engineering Lab</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-main: #f1f5f9;
-            --text-muted: #94a3b8;
-            --accent: #38bdf8; /* Sky Blue */
-            --accent-glow: rgba(56, 189, 248, 0.2);
-            --code-bg: #0f1117;
+            --bg-color: #0f172a;       /* 짙은 남색 배경 */
+            --card-bg: #1e293b;        /* 카드 배경 */
+            --text-main: #f1f5f9;      /* 메인 텍스트 */
+            --text-muted: #94a3b8;     /* 보조 텍스트 */
+            --accent: #38bdf8;         /* 하늘색 포인트 */
+            --accent-dim: rgba(56, 189, 248, 0.1);
+            --border: #334155;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', sans-serif; }
         
-        body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; }
+        body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.7; padding-bottom: 5rem; }
 
-        /* Header */
+        /* --- Header --- */
         header {
-            padding: 4rem 2rem;
+            padding: 5rem 2rem;
             text-align: center;
-            border-bottom: 1px solid #334155;
-            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+            background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
+            border-bottom: 1px solid var(--border);
         }
         
-        h1 { font-size: 2.5rem; margin-bottom: 1rem; background: linear-gradient(90deg, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .subtitle { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
-
-        /* Container */
-        .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
-
-        /* Sections */
-        section { margin-bottom: 4rem; }
-        .section-title { font-size: 1.8rem; margin-bottom: 1.5rem; border-left: 4px solid var(--accent); padding-left: 1rem; display: flex; align-items: center; gap: 10px; }
+        h1 { 
+            font-size: 2.8rem; 
+            margin-bottom: 1rem; 
+            background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            font-weight: 800;
+        }
         
-        /* Cards */
+        .subtitle { color: var(--text-muted); font-size: 1.1rem; max-width: 700px; margin: 0 auto; word-break: keep-all; }
+
+        /* --- Layout --- */
+        .container { max-width: 900px; margin: 0 auto; padding: 3rem 1.5rem; }
+
+        section { margin-bottom: 5rem; }
+        
+        .section-header {
+            display: flex; align-items: center; gap: 12px; margin-bottom: 1.5rem;
+        }
+        .section-num {
+            font-size: 1.5rem; font-weight: 900; color: var(--accent); opacity: 0.5;
+        }
+        .section-title { font-size: 1.8rem; font-weight: 700; color: white; }
+        
+        /* --- Card Design --- */
         .card {
             background-color: var(--card-bg);
-            padding: 2rem;
-            border-radius: 12px;
-            border: 1px solid #334155;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            transition: transform 0.2s;
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
         }
         .card:hover { transform: translateY(-5px); border-color: var(--accent); }
         
-        h3 { color: var(--accent); margin-bottom: 1rem; font-size: 1.4rem; }
-        p { margin-bottom: 1rem; color: #cbd5e1; }
+        h3 { color: var(--accent); margin: 2rem 0 1rem 0; font-size: 1.4rem; font-weight: 700; }
+        h3:first-child { margin-top: 0; }
         
-        /* Tech Tags */
-        .tags { display: flex; gap: 10px; margin-top: 1rem; flex-wrap: wrap; }
-        .tag { background: rgba(56, 189, 248, 0.1); color: var(--accent); padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(56, 189, 248, 0.2); }
+        p { margin-bottom: 1rem; color: #cbd5e1; font-size: 1.05rem; }
+        strong { color: #fff; font-weight: 600; }
 
-        /* Calculator Tool Styles */
-        .calc-box {
-            background-color: var(--code-bg);
+        /* --- Custom UI Elements --- */
+        .tech-box {
+            background: rgba(15, 23, 42, 0.6);
             padding: 1.5rem;
-            border-radius: 8px;
-            border: 1px solid var(--accent);
+            border-radius: 12px;
+            border-left: 4px solid var(--accent);
+            margin: 1.5rem 0;
+        }
+        .tech-box p { margin: 0; font-size: 0.95rem; }
+
+        .list-group { padding-left: 1.2rem; margin-bottom: 1.5rem; list-style: none; }
+        .list-group li { position: relative; padding-left: 1.5rem; margin-bottom: 0.8rem; color: #cbd5e1; }
+        .list-group li::before {
+            content: "•"; position: absolute; left: 0; color: var(--accent); font-weight: bold; font-size: 1.2rem; line-height: 1.2rem;
+        }
+
+        .tags { display: flex; gap: 10px; margin-top: 2rem; flex-wrap: wrap; }
+        .tag { 
+            background: var(--accent-dim); 
+            color: var(--accent); 
+            padding: 6px 14px; 
+            border-radius: 100px; 
+            font-size: 0.85rem; 
+            font-weight: 600; 
+            border: 1px solid rgba(56, 189, 248, 0.2); 
+        }
+
+        /* --- Calculator --- */
+        .calc-wrapper {
+            background: #0b1120;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
             margin-top: 2rem;
         }
-        .calc-input { display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; }
-        .input-group { flex: 1; display: flex; flex-direction: column; gap: 5px; }
-        label { font-size: 0.9rem; color: var(--text-muted); }
+        .calc-header { font-size: 1.1rem; color: white; font-weight: bold; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 8px;}
+        
+        .inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+        @media(max-width: 600px) { .inputs { grid-template-columns: 1fr; } }
+        
+        .input-group { display: flex; flex-direction: column; gap: 8px; }
+        label { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; }
+        
         input, select {
-            padding: 10px; border-radius: 6px; border: 1px solid #475569;
-            background: #1e293b; color: white; outline: none;
+            background: #1e293b; border: 1px solid #475569; color: white;
+            padding: 12px; border-radius: 8px; outline: none; transition: 0.2s;
         }
-        input:focus { border-color: var(--accent); }
-        .result-area { text-align: right; font-size: 1.2rem; font-weight: bold; color: var(--accent); }
+        input:focus, select:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(56,189,248,0.2); }
 
-        /* Code Block */
-        pre { background: #000; padding: 1rem; border-radius: 6px; overflow-x: auto; margin: 1rem 0; border: 1px solid #333; }
-        code { font-family: 'Consolas', monospace; color: #a5b4fc; }
+        .result-box {
+            background: var(--accent-dim);
+            border: 1px solid var(--accent);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: right;
+        }
+        .result-label { font-size: 0.9rem; color: var(--accent); margin-bottom: 5px; display: block; }
+        .result-val { font-size: 2rem; font-weight: 800; color: white; }
+        .unit { font-size: 1rem; font-weight: normal; color: var(--text-muted); }
 
-        footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid #334155; margin-top: 4rem; }
+        /* --- Footer --- */
+        footer { text-align: center; color: var(--text-muted); font-size: 0.85rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+
     </style>
 </head>
 <body>
 
     <header>
-        <h1>AI Ethics & Engineering Log</h1>
+        <h1>AI Ethics & Engineering Lab</h1>
         <p class="subtitle">
-            정보통신윤리교육 탐구 보고서 & 기술 심화 연구<br>
-            "안전한 AI(Safe AI)와 효율적인 시스템(Efficient System)을 향한 여정"
+            정보통신윤리교육 심화 탐구 포트폴리오<br>
+            "안전한 인공지능과 효율적인 시스템 최적화에 대한 탐구"
         </p>
     </header>
 
     <div class="container">
 
         <section>
-            <h2 class="section-title">01. 연구 배경 및 윤리적 고찰</h2>
+            <div class="section-header">
+                <span class="section-num">01.</span>
+                <h2 class="section-title">연구 배경 (Motivation)</h2>
+            </div>
             <div class="card">
                 <p>
-                    최근 딥페이크와 생성형 AI의 무분별한 확산은 기술적 통제 장치의 부재가 사회에 어떤 혼란을 주는지 보여줍니다.
-                    AI 개발자를 꿈꾸는 학생으로서, 단순한 성능 향상을 넘어 <strong>'데이터 프라이버시'</strong>와 <strong>'인프라의 한계'</strong>를
-                    기술적으로 어떻게 해결할 수 있을지 고민했습니다.
+                    최근 딥페이크와 생성형 AI의 무분별한 확산은 기술적 통제 장치의 부재가 사회에 어떤 혼란을 주는지 여실히 보여줍니다.
+                    AI 개발자를 꿈꾸는 학생으로서, 윤리적 문제를 법에만 의존할 것이 아니라 <strong>'기술적으로 해결(Engineering Solution)'</strong>해야 한다고 생각했습니다.
+                </p>
+                <p>
+                    이에 따라 <strong>데이터 프라이버시</strong>를 보호하는 학습 기법과, 거대 언어 모델(LLM)을 개인이 안전하게 통제하며 사용하기 위한 <strong>최적화 기술</strong>을 주제로 심층 연구를 진행했습니다.
                 </p>
                 <div class="tags">
-                    <span class="tag">Deepfake Analysis</span>
                     <span class="tag">AI Ethics</span>
                     <span class="tag">Problem Solving</span>
+                    <span class="tag">Engineering Mindset</span>
                 </div>
             </div>
         </section>
 
         <section>
-            <h2 class="section-title">02. 데이터 보안 솔루션: 연합 학습</h2>
+            <div class="section-header">
+                <span class="section-num">02.</span>
+                <h2 class="section-title">데이터 보안: 연합 학습 & DP</h2>
+            </div>
             <div class="card">
-                <h3>Federated Learning & Differential Privacy</h3>
+                <h3>Federated Learning Architecture</h3>
                 <p>
-                    중앙 서버로 데이터를 전송하지 않고, 로컬 기기에서 연산된 <strong>가중치(Weight)</strong>와 
-                    <strong>그라디언트(Gradient)</strong>만을 공유하여 모델을 학습시키는 메커니즘을 연구했습니다.
+                    기존의 중앙 집중형 학습(Centralized Learning)은 모든 데이터를 서버로 모아야 해서 해킹 시 대규모 정보 유출 위험이 있었습니다.
+                    이를 해결하기 위해 데이터가 아닌 <strong>모델(가중치)이 이동하는 분산 학습 시스템</strong>을 연구했습니다.
                 </p>
+                
+                <ul class="list-group">
+                    <li><strong>Local Training:</strong> 사용자의 기기(Client) 내에서 로컬 데이터로 모델을 학습시킵니다. 데이터는 외부로 나가지 않습니다.</li>
+                    <li><strong>Aggregation (FedAvg):</strong> 학습된 가중치(Weight)와 그라디언트(Gradient)만 서버로 전송되어 평균값으로 글로벌 모델을 업데이트합니다.</li>
+                </ul>
+
+                <h3> 차등 정보 보호 (Differential Privacy)</h3>
                 <p>
-                    특히 모델 역전 공격(Model Inversion Attack)을 방어하기 위해 데이터에 수학적 노이즈(Laplace Noise 등)를 주입하는
-                    <strong>차등 정보 보호(Differential Privacy)</strong> 기술이 필수적임을 확인했습니다.
+                    하지만 연구 중, 단순히 가중치만 공유하더라도 역공학을 통해 원본 데이터를 복원해내는 <strong>모델 역전 공격(Model Inversion Attack)</strong>의 취약점을 발견했습니다.
+                    이를 방어하기 위해 <strong>DP-SGD(Differentially Private SGD)</strong> 메커니즘을 탐구했습니다.
                 </p>
+
+                <div class="tech-box">
+                    <p>
+                        <strong>기술적 핵심 (Engineering Detail):</strong><br>
+                        전송되는 그라디언트에 수학적으로 계산된 <strong>노이즈(Laplace or Gaussian Noise)</strong>를 주입합니다.
+                        이 노이즈는 데이터의 전체적인 통계적 특성은 유지하되, 개별 데이터의 식별은 불가능하게 만듭니다.
+                        이때 <strong>프라이버시 예산(Epsilon, &epsilon;)</strong>을 조절하여 <em>'보안성'</em>과 <em>'모델 정확도'</em> 간의 Trade-off를 최적화하는 것이 핵심입니다.
+                    </p>
+                </div>
 
                 <div class="tags">
                     <span class="tag">FedAvg Algorithm</span>
-                    <span class="tag">Privacy-Preserving AI</span>
+                    <span class="tag">DP-SGD</span>
+                    <span class="tag">Gaussian Mechanism</span>
                     <span class="tag">Cyber Security</span>
                 </div>
             </div>
         </section>
 
         <section>
-            <h2 class="section-title">03. OSS LLM 최적화 엔지니어링</h2>
+            <div class="section-header">
+                <span class="section-num">03.</span>
+                <h2 class="section-title">OSS LLM 최적화 엔지니어링</h2>
+            </div>
             <div class="card">
-                <h3>130B 모델 구동의 한계와 해결책</h3>
+                <h3>130B 모델 구동의 한계 (Memory Wall)</h3>
                 <p>
-                    보안을 위해 로컬 환경에서 오픈소스 LLM을 구동하려 할 때, 가장 큰 장벽은 <strong>'메모리 장벽(Memory Wall)'</strong>입니다.
-                    매개변수 1,300억 개(130B)의 모델을 FP16(16bit) 정밀도로 로드하려면 약 260GB 이상의 VRAM이 필요합니다.
+                    보안을 위해 폐쇄적인 클라우드 대신 로컬 환경에서 <strong>오픈소스 LLM(OSS LLM)</strong>을 구동하려 할 때, 가장 큰 장벽은 하드웨어의 물리적 한계입니다.
+                    특히 매개변수 1,300억 개(130B)의 모델을 FP16(16bit) 정밀도로 로드하려면 약 <strong>260GB 이상의 VRAM</strong>이 필요합니다.
+                    이는 일반적인 소비자용 GPU는 물론, 고성능 서버용 GPU 1장으로도 감당할 수 없는 수준입니다.
                 </p>
+
+                <h3>해결책: 양자화(Quantization)</h3>
                 <p>
-                    이를 일반적인 하드웨어에서 구동하기 위해 <strong>양자화(Quantization)</strong> 기술을 연구했습니다.
-                    FP16 데이터를 INT4(4bit)로 압축하는 <strong>AWQ / GPTQ</strong> 알고리즘을 적용하면, 성능 저하를 최소화하면서 
-                    메모리 요구량을 1/4 수준으로 줄일 수 있습니다.
+                    이 문제를 해결하기 위해 <strong>양자화(Quantization)</strong> 기술을 연구했습니다.
+                    FP16(2byte) 데이터를 INT4(0.5byte)로 압축하는 <strong>AWQ</strong>나 <strong>GPTQ</strong> 알고리즘을 적용하면, 성능 저하를 최소화하면서 메모리 요구량을 1/4 수준으로 줄일 수 있습니다.
                 </p>
-                
-                <div class="calc-box">
-                    <h4>🛠️ LLM VRAM 요구량 계산기 (Simulator)</h4>
-                    <p style="font-size: 0.9rem; color: #94a3b8;">모델 파라미터 수와 양자화 비트를 입력하여 필요한 VRAM을 계산해보세요.</p>
+                <p>아래는 제가 학습한 내용을 바탕으로 구현한 <strong>LLM 메모리 요구량 계산기</strong>입니다.</p>
+
+                <div class="calc-wrapper">
+                    <div class="calc-header">
+                        <span> VRAM 시뮬레이션 </span>
+                    </div>
                     
-                    <div class="calc-input">
+                    <div class="inputs">
                         <div class="input-group">
-                            <label>모델 크기 (Billion)</label>
+                            <label for="paramSize">모델 파라미터 수 (Billion)</label>
                             <input type="number" id="paramSize" value="130" placeholder="예: 7, 13, 70, 130">
                         </div>
                         <div class="input-group">
-                            <label>양자화 수준 (Bit)</label>
+                            <label for="quantBit">양자화 정밀도 (Bit)</label>
                             <select id="quantBit">
                                 <option value="16">FP16 (16-bit, 원본)</option>
                                 <option value="8">INT8 (8-bit)</option>
@@ -161,14 +247,19 @@
                             </select>
                         </div>
                     </div>
-                    <div class="result-area">
-                        예상 필요 VRAM: <span id="resultVram">0</span> GB
+
+                    <div class="result-box">
+                        <span class="result-label">추론(Inference)을 위한 예상 VRAM</span>
+                        <span id="resultVram" class="result-val">0</span> <span class="unit">GB</span>
+                        <div style="font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top:5px;">
+                            * 모델 가중치 + KV Cache 오버헤드(약 20%) 포함
+                        </div>
                     </div>
                 </div>
 
                 <div class="tags">
                     <span class="tag">Quantization</span>
-                    <span class="tag">Model Optimization</span>
+                    <span class="tag">Optimization</span>
                     <span class="tag">AWQ / GPTQ</span>
                     <span class="tag">On-Device AI</span>
                 </div>
@@ -176,12 +267,17 @@
         </section>
 
         <section>
-            <h2 class="section-title">04. 결론 및 향후 계획</h2>
+            <div class="section-header">
+                <span class="section-num">04.</span>
+                <h2 class="section-title">결론 및 향후 계획</h2>
+            </div>
             <div class="card">
                 <p>
-                    정보통신윤리교육을 통해 기술의 사회적 책임을 통감했습니다. 
-                    앞으로도 <strong>'윤리적으로 안전하고(Safe)', '공학적으로 효율적인(Efficient)'</strong> 인공지능 모델을 설계하는
-                    AI 엔지니어가 되기 위해 RAG(검색 증강 생성) 기술과 데이터 전처리 파이프라인 구축 역량을 키워나갈 것입니다.
+                    이번 탐구를 통해 <strong>'윤리'</strong>는 단순한 도덕적 다짐이 아니라, <strong>'안전한 시스템을 설계하는 공학적 과정'</strong>임을 깨달았습니다.
+                </p>
+                <p>
+                    데이터를 보호하는 연합 학습 기술과, 거대 모델을 효율적으로 운용하는 최적화 기술을 모두 갖춘 <strong>'Full-Stack AI Engineer'</strong>가 되기 위해
+                    앞으로 RAG(검색 증강 생성) 기술과 MLOps(머신러닝 운영) 파이프라인 구축 역량을 키워나갈 것입니다.
                 </p>
             </div>
         </section>
@@ -189,8 +285,8 @@
     </div>
 
     <footer>
-        <p>Copyright © 2024 AI Engineering Student Portfolio. All rights reserved.</p>
-        <p style="margin-top:5px; font-size:0.8rem;">Developed based on Research from Ethics Education Class</p>
+        <p>Copyright © 2024 High School AI Research Project. All rights reserved.</p>
+        <p>Developed specifically for Ethics & Engineering Portfolio.</p>
     </footer>
 
     <script>
@@ -200,30 +296,34 @@
         const resultSpan = document.getElementById('resultVram');
 
         function calculateVRAM() {
-            const params = parseFloat(paramInput.value); // Billion units
-            const bits = parseInt(bitSelect.value); // Bits per parameter
+            // 입력값 가져오기
+            const params = parseFloat(paramInput.value); // 억(Billion) 단위
+            const bits = parseInt(bitSelect.value); // 비트 수
 
-            // Formula: (Params * 10^9 * Bits / 8) / 1024^3 (to GB)
-            // Simplified approximation: Params * Bits / 8 
-            // *Wait, usually simplified as: (Params * Precision_bytes) 
-            // FP16 = 2 bytes, INT8 = 1 byte, INT4 = 0.5 bytes.
-            
-            // Let's use the standard approximation for VRAM (Model Weights only)
-            // Weight Size (GB) = (Param_Count_Billion * Bit_Width) / 8
-            
-            let vram = (params * bits) / 8;
-            
-            // Add roughly 20% overhead for KV Cache & context (inference overhead)
-            let totalVram = vram * 1.2;
+            if (isNaN(params) || params <= 0) {
+                resultSpan.innerText = "0";
+                return;
+            }
 
+            // 계산 공식 설명
+            // 1. 순수 모델 가중치 크기 (GB) = (파라미터 수 * 10^9 * 비트 수 / 8) / 1024^3
+            //    -> 간단히 근사하면: 파라미터 수(B) * 비트 수 / 8
+            
+            let modelSizeGB = (params * bits) / 8;
+            
+            // 2. 추론 오버헤드 (KV Cache, Context Window, Library overhead 등)
+            //    보통 20% 정도의 여유 공간을 둡니다.
+            let totalVram = modelSizeGB * 1.2;
+
+            // 소수점 둘째자리까지 표시
             resultSpan.innerText = totalVram.toFixed(2);
         }
 
-        // Add Event Listeners
+        // 이벤트 리스너 추가 (값이 바뀔 때마다 자동 계산)
         paramInput.addEventListener('input', calculateVRAM);
         bitSelect.addEventListener('change', calculateVRAM);
 
-        // Initial Calculation
+        // 페이지 로드 시 초기 계산 실행
         calculateVRAM();
     </script>
 
