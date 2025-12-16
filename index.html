@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Ethics & Engineering Log</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8; /* Sky Blue */
+            --accent-glow: rgba(56, 189, 248, 0.2);
+            --code-bg: #0f1117;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif; }
+        
+        body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; }
+
+        /* Header */
+        header {
+            padding: 4rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid #334155;
+            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+        }
+        
+        h1 { font-size: 2.5rem; margin-bottom: 1rem; background: linear-gradient(90deg, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+        /* Container */
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+
+        /* Sections */
+        section { margin-bottom: 4rem; }
+        .section-title { font-size: 1.8rem; margin-bottom: 1.5rem; border-left: 4px solid var(--accent); padding-left: 1rem; display: flex; align-items: center; gap: 10px; }
+        
+        /* Cards */
+        .card {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
+        }
+        .card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        
+        h3 { color: var(--accent); margin-bottom: 1rem; font-size: 1.4rem; }
+        p { margin-bottom: 1rem; color: #cbd5e1; }
+        
+        /* Tech Tags */
+        .tags { display: flex; gap: 10px; margin-top: 1rem; flex-wrap: wrap; }
+        .tag { background: rgba(56, 189, 248, 0.1); color: var(--accent); padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(56, 189, 248, 0.2); }
+
+        /* Calculator Tool Styles */
+        .calc-box {
+            background-color: var(--code-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--accent);
+            margin-top: 2rem;
+        }
+        .calc-input { display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; }
+        .input-group { flex: 1; display: flex; flex-direction: column; gap: 5px; }
+        label { font-size: 0.9rem; color: var(--text-muted); }
+        input, select {
+            padding: 10px; border-radius: 6px; border: 1px solid #475569;
+            background: #1e293b; color: white; outline: none;
+        }
+        input:focus { border-color: var(--accent); }
+        .result-area { text-align: right; font-size: 1.2rem; font-weight: bold; color: var(--accent); }
+
+        /* Code Block */
+        pre { background: #000; padding: 1rem; border-radius: 6px; overflow-x: auto; margin: 1rem 0; border: 1px solid #333; }
+        code { font-family: 'Consolas', monospace; color: #a5b4fc; }
+
+        footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid #334155; margin-top: 4rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>AI Ethics & Engineering Log</h1>
+        <p class="subtitle">
+            정보통신윤리교육 탐구 보고서 & 기술 심화 연구<br>
+            "안전한 AI(Safe AI)와 효율적인 시스템(Efficient System)을 향한 여정"
+        </p>
+    </header>
+
+    <div class="container">
+
+        <section>
+            <h2 class="section-title">01. 연구 배경 및 윤리적 고찰</h2>
+            <div class="card">
+                <p>
+                    최근 딥페이크와 생성형 AI의 무분별한 확산은 기술적 통제 장치의 부재가 사회에 어떤 혼란을 주는지 보여줍니다.
+                    AI 개발자를 꿈꾸는 학생으로서, 단순한 성능 향상을 넘어 <strong>'데이터 프라이버시'</strong>와 <strong>'인프라의 한계'</strong>를
+                    기술적으로 어떻게 해결할 수 있을지 고민했습니다.
+                </p>
+                <div class="tags">
+                    <span class="tag">Deepfake Analysis</span>
+                    <span class="tag">AI Ethics</span>
+                    <span class="tag">Problem Solving</span>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">02. 데이터 보안 솔루션: 연합 학습</h2>
+            <div class="card">
+                <h3>Federated Learning & Differential Privacy</h3>
+                <p>
+                    중앙 서버로 데이터를 전송하지 않고, 로컬 기기에서 연산된 <strong>가중치(Weight)</strong>와 
+                    <strong>그라디언트(Gradient)</strong>만을 공유하여 모델을 학습시키는 메커니즘을 연구했습니다.
+                </p>
+                <p>
+                    특히 모델 역전 공격(Model Inversion Attack)을 방어하기 위해 데이터에 수학적 노이즈(Laplace Noise 등)를 주입하는
+                    <strong>차등 정보 보호(Differential Privacy)</strong> 기술이 필수적임을 확인했습니다.
+                </p>
+[Image of Federated Learning architecture diagram]
+                <div class="tags">
+                    <span class="tag">FedAvg Algorithm</span>
+                    <span class="tag">Privacy-Preserving AI</span>
+                    <span class="tag">Cyber Security</span>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">03. OSS LLM 최적화 엔지니어링</h2>
+            <div class="card">
+                <h3>130B 모델 구동의 한계와 해결책</h3>
+                <p>
+                    보안을 위해 로컬 환경에서 오픈소스 LLM을 구동하려 할 때, 가장 큰 장벽은 <strong>'메모리 장벽(Memory Wall)'</strong>입니다.
+                    매개변수 1,300억 개(130B)의 모델을 FP16(16bit) 정밀도로 로드하려면 약 260GB 이상의 VRAM이 필요합니다.
+                </p>
+                <p>
+                    이를 일반적인 하드웨어에서 구동하기 위해 <strong>양자화(Quantization)</strong> 기술을 연구했습니다.
+                    FP16 데이터를 INT4(4bit)로 압축하는 <strong>AWQ / GPTQ</strong> 알고리즘을 적용하면, 성능 저하를 최소화하면서 
+                    메모리 요구량을 1/4 수준으로 줄일 수 있습니다.
+                </p>
+                
+                <div class="calc-box">
+                    <h4>🛠️ LLM VRAM 요구량 계산기 (Simulator)</h4>
+                    <p style="font-size: 0.9rem; color: #94a3b8;">모델 파라미터 수와 양자화 비트를 입력하여 필요한 VRAM을 계산해보세요.</p>
+                    
+                    <div class="calc-input">
+                        <div class="input-group">
+                            <label>모델 크기 (Billion)</label>
+                            <input type="number" id="paramSize" value="130" placeholder="예: 7, 13, 70, 130">
+                        </div>
+                        <div class="input-group">
+                            <label>양자화 수준 (Bit)</label>
+                            <select id="quantBit">
+                                <option value="16">FP16 (16-bit, 원본)</option>
+                                <option value="8">INT8 (8-bit)</option>
+                                <option value="4" selected>INT4 (4-bit, AWQ/GPTQ)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="result-area">
+                        예상 필요 VRAM: <span id="resultVram">0</span> GB
+                    </div>
+                </div>
+
+                <div class="tags">
+                    <span class="tag">Quantization</span>
+                    <span class="tag">Model Optimization</span>
+                    <span class="tag">AWQ / GPTQ</span>
+                    <span class="tag">On-Device AI</span>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">04. 결론 및 향후 계획</h2>
+            <div class="card">
+                <p>
+                    정보통신윤리교육을 통해 기술의 사회적 책임을 통감했습니다. 
+                    앞으로도 <strong>'윤리적으로 안전하고(Safe)', '공학적으로 효율적인(Efficient)'</strong> 인공지능 모델을 설계하는
+                    AI 엔지니어가 되기 위해 RAG(검색 증강 생성) 기술과 데이터 전처리 파이프라인 구축 역량을 키워나갈 것입니다.
+                </p>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>Copyright © 2024 AI Engineering Student Portfolio. All rights reserved.</p>
+        <p style="margin-top:5px; font-size:0.8rem;">Developed based on Research from Ethics Education Class</p>
+    </footer>
+
+    <script>
+        // VRAM Calculator Logic
+        const paramInput = document.getElementById('paramSize');
+        const bitSelect = document.getElementById('quantBit');
+        const resultSpan = document.getElementById('resultVram');
+
+        function calculateVRAM() {
+            const params = parseFloat(paramInput.value); // Billion units
+            const bits = parseInt(bitSelect.value); // Bits per parameter
+
+            // Formula: (Params * 10^9 * Bits / 8) / 1024^3 (to GB)
+            // Simplified approximation: Params * Bits / 8 
+            // *Wait, usually simplified as: (Params * Precision_bytes) 
+            // FP16 = 2 bytes, INT8 = 1 byte, INT4 = 0.5 bytes.
+            
+            // Let's use the standard approximation for VRAM (Model Weights only)
+            // Weight Size (GB) = (Param_Count_Billion * Bit_Width) / 8
+            
+            let vram = (params * bits) / 8;
+            
+            // Add roughly 20% overhead for KV Cache & context (inference overhead)
+            let totalVram = vram * 1.2;
+
+            resultSpan.innerText = totalVram.toFixed(2);
+        }
+
+        // Add Event Listeners
+        paramInput.addEventListener('input', calculateVRAM);
+        bitSelect.addEventListener('change', calculateVRAM);
+
+        // Initial Calculation
+        calculateVRAM();
