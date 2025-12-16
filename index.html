@@ -7,11 +7,11 @@
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
     <style>
         :root {
-            --bg-color: #0f172a;       /* 짙은 남색 배경 */
-            --card-bg: #1e293b;        /* 카드 배경 */
-            --text-main: #f1f5f9;      /* 메인 텍스트 */
-            --text-muted: #94a3b8;     /* 보조 텍스트 */
-            --accent: #38bdf8;         /* 하늘색 포인트 */
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
             --accent-dim: rgba(56, 189, 248, 0.1);
             --border: #334155;
         }
@@ -20,7 +20,6 @@
         
         body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.7; padding-bottom: 5rem; }
 
-        /* --- Header --- */
         header {
             padding: 5rem 2rem;
             text-align: center;
@@ -39,7 +38,6 @@
         
         .subtitle { color: var(--text-muted); font-size: 1.1rem; max-width: 700px; margin: 0 auto; word-break: keep-all; }
 
-        /* --- Layout --- */
         .container { max-width: 900px; margin: 0 auto; padding: 3rem 1.5rem; }
 
         section { margin-bottom: 5rem; }
@@ -52,7 +50,6 @@
         }
         .section-title { font-size: 1.8rem; font-weight: 700; color: white; }
         
-        /* --- Card Design --- */
         .card {
             background-color: var(--card-bg);
             padding: 2.5rem;
@@ -69,7 +66,6 @@
         p { margin-bottom: 1rem; color: #cbd5e1; font-size: 1.05rem; }
         strong { color: #fff; font-weight: 600; }
 
-        /* --- Custom UI Elements --- */
         .tech-box {
             background: rgba(15, 23, 42, 0.6);
             padding: 1.5rem;
@@ -96,7 +92,6 @@
             border: 1px solid rgba(56, 189, 248, 0.2); 
         }
 
-        /* --- Calculator --- */
         .calc-wrapper {
             background: #0b1120;
             border: 1px solid var(--border);
@@ -129,7 +124,6 @@
         .result-val { font-size: 2rem; font-weight: 800; color: white; }
         .unit { font-size: 1rem; font-weight: normal; color: var(--text-muted); }
 
-        /* --- Footer --- */
         footer { text-align: center; color: var(--text-muted); font-size: 0.85rem; padding-top: 2rem; border-top: 1px solid var(--border); }
 
     </style>
@@ -290,40 +284,28 @@
     </footer>
 
     <script>
-        // VRAM Calculator Logic
         const paramInput = document.getElementById('paramSize');
         const bitSelect = document.getElementById('quantBit');
         const resultSpan = document.getElementById('resultVram');
 
         function calculateVRAM() {
-            // 입력값 가져오기
-            const params = parseFloat(paramInput.value); // 억(Billion) 단위
-            const bits = parseInt(bitSelect.value); // 비트 수
+            const params = parseFloat(paramInput.value);
+            const bits = parseInt(bitSelect.value);
 
             if (isNaN(params) || params <= 0) {
                 resultSpan.innerText = "0";
                 return;
             }
 
-            // 계산 공식 설명
-            // 1. 순수 모델 가중치 크기 (GB) = (파라미터 수 * 10^9 * 비트 수 / 8) / 1024^3
-            //    -> 간단히 근사하면: 파라미터 수(B) * 비트 수 / 8
-            
             let modelSizeGB = (params * bits) / 8;
-            
-            // 2. 추론 오버헤드 (KV Cache, Context Window, Library overhead 등)
-            //    보통 20% 정도의 여유 공간을 둡니다.
             let totalVram = modelSizeGB * 1.2;
 
-            // 소수점 둘째자리까지 표시
             resultSpan.innerText = totalVram.toFixed(2);
         }
 
-        // 이벤트 리스너 추가 (값이 바뀔 때마다 자동 계산)
         paramInput.addEventListener('input', calculateVRAM);
         bitSelect.addEventListener('change', calculateVRAM);
 
-        // 페이지 로드 시 초기 계산 실행
         calculateVRAM();
     </script>
 
